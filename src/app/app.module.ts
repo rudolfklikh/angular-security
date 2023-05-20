@@ -27,11 +27,6 @@ import {RbacAllowDirective} from "./common/rbac-allow.directive";
 import {AuthorizationGuard} from "./services/authorization.guard";
 
 
-export function createAdminOnlyGuard(authService:AuthService, router:Router) {
-    return new AuthorizationGuard(['ADMIN'], authService, router);
-}
-
-
 
 @NgModule({
     declarations: [
@@ -45,25 +40,20 @@ export function createAdminOnlyGuard(authService:AuthService, router:Router) {
     imports: [
         BrowserModule,
         HttpClientModule,
-        HttpClientXsrfModule.withOptions({
-            cookieName: 'XSRF-TOKEN',
-            headerName: 'x-xsrf-token'
-        }),
         RouterModule.forRoot(routesConfig),
         ReactiveFormsModule
     ],
     providers: [
         LessonsService,
-        AuthService,
-        {
-            provide: 'adminsOnlyGuard',
-            useFactory: createAdminOnlyGuard,
-            deps: [
-                AuthService,
-                Router
-            ]
+        // {
+        //     provide: 'adminsOnlyGuard',
+        //     useFactory: createAdminOnlyGuard,
+        //     deps: [
+        //         AuthService,
+        //         Router
+        //     ]
 
-        }
+        // }
     ],
     bootstrap: [AppComponent]
 })

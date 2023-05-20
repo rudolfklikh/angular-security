@@ -36,9 +36,7 @@ const options = commandLineArgs(optionDefinitions);
 
 // REST API
 app.route('/api/lessons')
-    .get(checkIfAuthenticated,
-        _.partial(checkIfAuthorized,['STUDENT']),
-        readAllLessons);
+    .get(readAllLessons);
 
 app.route('/api/admin')
     .post(checkIfAuthenticated,

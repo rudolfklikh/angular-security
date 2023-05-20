@@ -17,11 +17,11 @@ export const routesConfig: Routes = [
         path: 'signup',
         component: SignupComponent
     },
-    {
-        path: 'admin',
-        component: AdminComponent,
-        canActivate: ["adminsOnlyGuard"]
-    },
+    // {
+    //     path: 'admin',
+    //     component: AdminComponent,
+    //     canActivate: ["adminsOnlyGuard"]
+    // },
     {
         path: '',
         redirectTo:'/lessons',

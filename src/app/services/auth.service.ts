@@ -12,16 +12,18 @@ export const ANONYMOUS_USER: User = {
 }
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthService {
 
     private subject = new BehaviorSubject<User>(undefined);
 
-    user$: Observable<User> = this.subject.asObservable().pipe(filter(user => !!user));
+    user$: Observable<User>;
 
-    isLoggedIn$: Observable<boolean> = this.user$.pipe(map(user => !!user.id));
+    // isLoggedIn$: Observable<boolean> = this.user$.pipe(map(user => !!user.id));
 
-    isLoggedOut$: Observable<boolean> = this.isLoggedIn$.pipe(map(isLoggedIn => !isLoggedIn));
+    // isLoggedOut$: Observable<boolean> = this.isLoggedIn$.pipe(map(isLoggedIn => !isLoggedIn));
 
     constructor(private http: HttpClient) {
         http.get<User>('/api/user').pipe(
