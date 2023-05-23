@@ -17,5 +17,5 @@ schema
 
 
 export function validatePassword(password:string) {
-    return schema.validate(password, {list:true});
+    return schema.validate(password, { list: true });
 }

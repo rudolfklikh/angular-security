@@ -9,8 +9,8 @@ import { User } from "./model/user";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
-//   isLoggedIn$: Observable<boolean>;
-//   isLoggedOut$: Observable<boolean>;
+  isLoggedIn$: Observable<boolean>;
+  isLoggedOut$: Observable<boolean>;
   user$: Observable<User>;
 
   constructor(private authService: AuthService) {}
