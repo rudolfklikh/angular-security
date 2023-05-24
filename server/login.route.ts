@@ -43,7 +43,7 @@ async function attemptLogin(credentials: any, user: DbUser) {
   );
 
   if (!isPasswordValid) {
-    throw new Error("Password Invalid");
+    throw new Error("Password Invalid ");
   }
 
   const sessionID = await randomBytes(32).then((bytes) =>
