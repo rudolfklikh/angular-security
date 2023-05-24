@@ -2,17 +2,17 @@
 
 import {Request, Response} from "express";
 import {db} from "./database";
+import { sessionStore } from "./session-store";
 
 
 
 export function getUser(req:Request, res:Response) {
 
-    const userInfo = req["user"];
+    const sessionID = req.cookies['SESSIONID'];
 
-    if (userInfo) {
+    const user = sessionStore.findUserBySessionID(sessionID);
 
-        const user = db.findUserById(userInfo.sub);
-
+    if (user) {
         res.status(200).json({email:user.email, id:user.id, roles: user.roles});
     }
     else {

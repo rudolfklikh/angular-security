@@ -14,9 +14,9 @@ export const ANONYMOUS_USER: User = {
   providedIn: "root",
 })
 export class AuthService {
-  private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
+  private subject = new BehaviorSubject<User>(undefined);
 
-  user$: Observable<User> = this.subject.asObservable();
+  user$: Observable<User> = this.subject.asObservable().pipe(filter(user => !!user));
   isLoggedIn$: Observable<boolean> = this.user$.pipe(map((user) => !!user.id));
   isLoggedOut$: Observable<boolean> = this.isLoggedIn$.pipe(
     map((isLoggedIn) => !isLoggedIn)

@@ -35,6 +35,13 @@ app.route("/api/lessons").get(readAllLessons);
 
 app.route("/api/signup").post(createUser);
 
+app.route("/api/user").get(getUser);
+// checkIfAuthenticated, checkCsrfToken
+
+app.route("/api/login").post(login);
+
+app.route("/api/logout").post(logout);
+
 app
   .route("/api/admin")
   .post(
@@ -43,11 +50,6 @@ app
     loginAsUser
   );
 
-app.route("/api/user").get(getUser);
-
-app.route("/api/logout").post(checkIfAuthenticated, checkCsrfToken, logout);
-
-app.route("/api/login").post(login);
 
 if (options.secure) {
   const httpsServer = https.createServer(
