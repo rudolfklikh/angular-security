@@ -22,15 +22,22 @@ const RSA_PUBLIC_KEY = fs.readFileSync('./demos/public.key');
 const SESSION_DURATION = 1000;
 
 
-export async function createSessionToken(user: DbUser) {
-    return signJwt({
-            roles: user.roles
-        },
-        RSA_PRIVATE_KEY, {
+export async function createSessionToken(userID: string) {
+    /* JWT Example */
+    return jwt.sign({}, RSA_PRIVATE_KEY, {
         algorithm: 'RS256',
-        expiresIn: 7200,
-        subject: user.id.toString()
-    });
+        expiresIn: 240,
+        subject: userID
+    })
+
+    // return signJwt({
+    //         roles: user.roles
+    //     },
+    //     RSA_PRIVATE_KEY, {
+    //     algorithm: 'RS256',
+    //     expiresIn: 7200,
+    //     subject: user.id.toString()
+    // });
 }
 
 

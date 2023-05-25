@@ -25,12 +25,15 @@ async function createUserAndSession(res: Response, credentials) {
   const passwordDigest = await argon2.hash(credentials.password);
   const user = db.createUser(credentials.email, passwordDigest);
 
-  const sessionID = await randomBytes(32).then(bytes => bytes.toString('hex'));
+  /* State Session Management as Example !!!  */
+  // const sessionID = await randomBytes(32).then(bytes => bytes.toString('hex'));
+  // sessionStore.createSession(sessionID, user);
+  // res.cookie('SESSIONID', sessionID, { httpOnly: true, secure: true });
 
 
-  sessionStore.createSession(sessionID, user);
+  const sessionToken = await createSessionToken(user.id.toString());
 
-  // const sessionToken = await createSessionToken(user);
+  res.cookie('SESSIONID', sessionToken, { httpOnly: true, secure: true });
 
   // const csrfToken = await createCsrfToken();
 
@@ -38,7 +41,7 @@ async function createUserAndSession(res: Response, credentials) {
 
   // res.cookie("XSRF-TOKEN", csrfToken);
 
-  res.cookie('SESSIONID', sessionID, { httpOnly: true, secure: true });
+
 
   res.status(200).json({ id: user.id, email: user.email, roles: user.roles });
 }

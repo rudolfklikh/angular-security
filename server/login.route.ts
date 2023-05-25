@@ -28,7 +28,7 @@ async function loginAndBuildResponse(
 ) {
   try {
     const sessionID = await attemptLogin(credentials, user);
-
+    
     res.cookie("SESSIONID", sessionID, { httpOnly: true, secure: true });
     res.status(200).json({ id: user.id, email: user.email, roles: user.roles });
   } catch (err) {
@@ -46,10 +46,11 @@ async function attemptLogin(credentials: any, user: DbUser) {
     throw new Error("Password Invalid ");
   }
 
-  const sessionID = await randomBytes(32).then((bytes) =>
-    bytes.toString("hex")
-  );
-  sessionStore.createSession(sessionID, user);
+  /* Example of Session Management */
+  // const sessionID = await randomBytes(32).then((bytes) =>
+  //   bytes.toString("hex")
+  // );
+  // sessionStore.createSession(sessionID, user);
 
-  return sessionID;
+  return createSessionToken(user.id.toString());
 }

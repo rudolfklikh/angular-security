@@ -7,7 +7,8 @@ import { sessionStore } from './session-store';
 
 export function logout(req: Request, res: Response) {
     const sessionID = req.cookies['SESSIONID'];
-    sessionStore.destroySession(sessionID);
+    /* Example of Session Storage */
+    // sessionStore.destroySession(sessionID);
 
     res.clearCookie("SESSIONID");
     
