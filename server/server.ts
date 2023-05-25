@@ -31,9 +31,9 @@ const optionDefinitions = [
 const options = commandLineArgs(optionDefinitions);
 
 // REST API
-app.route("/api/lessons").get(readAllLessons);
-
 app.route("/api/signup").post(createUser);
+
+app.route("/api/lessons").get(checkIfAuthenticated, readAllLessons);
 
 app.route("/api/user").get(getUser);
 // checkIfAuthenticated, checkCsrfToken
