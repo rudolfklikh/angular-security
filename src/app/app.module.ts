@@ -40,6 +40,10 @@ import {AuthorizationGuard} from "./services/authorization.guard";
     imports: [
         BrowserModule,
         HttpClientModule,
+        HttpClientXsrfModule.withOptions({
+            cookieName: 'XSRF-TOKEN',
+            headerName: 'x-xsrf-token'
+        }),
         RouterModule.forRoot(routesConfig),
         ReactiveFormsModule
     ],
