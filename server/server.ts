@@ -40,7 +40,7 @@ app.route("/api/user").get(getUser);
 
 app.route("/api/login").post(login);
 
-app.route("/api/logout").post(logout);
+app.route("/api/logout").post(checkIfAuthenticated, checkCsrfToken, logout);
 
 app
   .route("/api/admin")

@@ -28,8 +28,11 @@ async function loginAndBuildResponse(
 ) {
   try {
     const sessionID = await attemptLogin(credentials, user);
+    const csrfToken = await createCsrfToken();
     
     res.cookie("SESSIONID", sessionID, { httpOnly: true, secure: true });
+    res.cookie("XSRF-TOKEN", csrfToken);
+    
     res.status(200).json({ id: user.id, email: user.email, roles: user.roles });
   } catch (err) {
     res.sendStatus(403);

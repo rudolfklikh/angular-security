@@ -32,14 +32,13 @@ async function createUserAndSession(res: Response, credentials) {
 
 
   const sessionToken = await createSessionToken(user.id.toString());
+  const csrfToken = await createCsrfToken();
 
   res.cookie('SESSIONID', sessionToken, { httpOnly: true, secure: true });
+  res.cookie("XSRF-TOKEN", csrfToken);
+  
 
-  // const csrfToken = await createCsrfToken();
 
-  // res.cookie("SESSIONID", sessionToken, {httpOnly:true, secure:true});
-
-  // res.cookie("XSRF-TOKEN", csrfToken);
 
 
 
